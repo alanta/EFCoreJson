@@ -116,7 +116,7 @@ public class When_a_field_is_mapped_as_JSON_data
 
         context.Persons.Add(new Person
         {
-            FirstName = "Chris",
+            FirstName = "Bob",
             LastName = "Sharp",
             DateOfBirth = new DateTime(2001, 12, 11),
             Addresses =
@@ -143,14 +143,14 @@ public class When_a_field_is_mapped_as_JSON_data
 
         // Act
         var context2 = CreateDataContext();
-        var person = context2.Persons.Single(p => p.FirstName == "Chris");
+        var person = context2.Persons.Single(p => p.FirstName == "Bob");
         person.Addresses = person.Addresses.Where(x => x.Type == "Work").ToList();
 
         context2.SaveChanges();
 
         // Assert
         var context3 = CreateDataContext();
-        context3.Persons.Single(p => p.FirstName == "Chris").Addresses.Should().BeEquivalentTo(new[]{
+        context3.Persons.Single(p => p.FirstName == "Bob").Addresses.Should().BeEquivalentTo(new[]{
             new Address
             {
                 City = "Nieuwegein",
